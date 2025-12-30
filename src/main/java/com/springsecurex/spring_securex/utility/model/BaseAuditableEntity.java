@@ -20,25 +20,28 @@ public class BaseAuditableEntity {
     @Column(name = "created_by")
     private String createdBy;
 
-    @Column(name = "modified_at", nullable = false, updatable = false)
+    @Column(name = "modified_at", nullable = false)
     private OffsetDateTime modifiedAt;
 
     @Column(name = "modified_by")
     private String modifiedBy;
 
     @Column(name = "is_active", nullable = false)
-    private Boolean isActive;
+    private Boolean active;
 
     @PrePersist
     protected void onCreate(){
         OffsetDateTime now = OffsetDateTime.now();
         this.createdAt = now;
         this.modifiedAt = now;
-        this.isActive = true;
+        this.active = true;
+        this.createdBy = "SYSTEM";
+        this.modifiedBy = "SYSTEM";
     }
 
     @PreUpdate
     protected void onUpdate(){
         this.modifiedAt = OffsetDateTime.now();
+        this.modifiedBy = "SYSTEM";
     }
 }

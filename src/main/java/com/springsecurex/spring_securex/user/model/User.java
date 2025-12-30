@@ -31,6 +31,12 @@ public class User extends BaseAuditableEntity {
     @Column(name = "password_hash", nullable = false)
     private String password;
 
+    @Column(name = "username", nullable = false, length = 100)
+    private String username;
+
+    @Column(name = "email", nullable = false, length = 100)
+    private String email;
+
     @ManyToMany
     @JoinTable(
             name = "users_roles",
